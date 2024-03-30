@@ -1,0 +1,961 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentation de l'API du module de billeterie automatique",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/all_clients": {
+            "get": {
+                "tags": [
+                    "The_client"
+                ],
+                "summary": "Afficher la liste des client",
+                "description": "Renvoyer la liste de tous les clients de marchandises",
+                "operationId": "ac04554a38a71a01f618a87ca698d061",
+                "responses": {
+                    "200": {
+                        "description": "Les clients de colis ont été trouvé et leurs informations sont retournées",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun client de marchandise dans la base de données ",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/client_show/{id}": {
+            "get": {
+                "tags": [
+                    "The_client"
+                ],
+                "summary": "Afficher les infos d'un client",
+                "description": "Renvoyer les infos d'un client",
+                "operationId": "65931d721ab2d0e4b505259c6170bfe4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant d'un client à voir ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " trouvé  !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun  ne correspond à l'identifiant saisi",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/client_store": {
+            "post": {
+                "tags": [
+                    "The_client"
+                ],
+                "summary": "Enregistrer un nouveau client",
+                "operationId": "6556db910ef366718b28ca90fff60453",
+                "parameters": [
+                    {
+                        "name": "nom_prenom",
+                        "in": "query",
+                        "description": "Nom et prénom du client",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "telephone",
+                        "in": "query",
+                        "description": "Téléphone du client.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email du client.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " enregistre avec succes.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Echec d'enregistrement de l'.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Un client avec ces informations existe déja",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "The_client"
+                ],
+                "summary": "Supprimer un client",
+                "description": "Elle se charger de supprimer un  et donc son compte",
+                "operationId": "690b0a1f2b81096b219ac5f0421f71bf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant du client à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " supprimé avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "L'étudiant n'existe pas !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/all_commandes": {
+            "get": {
+                "tags": [
+                    "The_commande"
+                ],
+                "summary": "Afficher la liste des commandes",
+                "description": "Renvoyer la liste de tous les commandes",
+                "operationId": "2b5f94f7adb0519d68cd3beabcd84bfe",
+                "responses": {
+                    "200": {
+                        "description": "Les commandes ont été trouvé et leurs informations sont retournées",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucune marchandise dans la base de données ",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/commande_show/{id}": {
+            "get": {
+                "tags": [
+                    "The_commande"
+                ],
+                "summary": "Afficher les infos d'une marchandise",
+                "description": "Renvoyer les infos d'une marchandise",
+                "operationId": "ad52fa709f232ca0089b5160f250d7f5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant d'une marchandise à voir ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " trouvé  !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun  ne correspond à l'identifiant saisi",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/commande_store": {
+            "post": {
+                "tags": [
+                    "The_commande"
+                ],
+                "summary": "Enregistrer une nouvelle marchandise",
+                "operationId": "c9f0599c83a328eeb2240f17bda9a647",
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "Identifiant d'un client.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Identifiant d'un utilisateur.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "marchandise_id",
+                        "in": "query",
+                        "description": "Identifiant d'une marchandise.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "destinataire_id",
+                        "in": "query",
+                        "description": "Identifiant d'un destinataire.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " enregistre avec succes.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Echec d'enregistrement de l'.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Un client avec ces informations existe déja",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/commande_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "The_commande"
+                ],
+                "summary": "Supprimer une marchandise",
+                "description": "Elle se charger de supprimer un  et donc son compte",
+                "operationId": "0647993ce53a2d72e6983c9f88649267",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant du marchandise à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " supprimé avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "L'étudiant n'existe pas !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/all_destinataires": {
+            "get": {
+                "tags": [
+                    "The_destinataire"
+                ],
+                "summary": "Afficher la liste des Destinataire",
+                "description": "Renvoyer la liste de tous les destinataires de marchandises",
+                "operationId": "79e57b18b0b06284cd47f4e0e20e6e5b",
+                "responses": {
+                    "200": {
+                        "description": "Les destinataires de colis ont été trouvé et leurs informations sont retournées",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun destinataire de marchandise dans la base de données ",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/destinataire_show/{id}": {
+            "get": {
+                "tags": [
+                    "The_destinataire"
+                ],
+                "summary": "Afficher les infos d'un destinataire",
+                "description": "Renvoyer les infos d'un destinataire",
+                "operationId": "b359f3a6c1d5b26591e4dca4c565e494",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant d'un destinataire à voir ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " trouvé  !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun  ne correspond à l'identifiant saisi",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/destinataire_store": {
+            "post": {
+                "tags": [
+                    "The_destinataire"
+                ],
+                "summary": "Enregistrer un nouveau destinataire",
+                "operationId": "64e405b05fc14db1a6bdb32fcb6015bc",
+                "parameters": [
+                    {
+                        "name": "nom_prenom",
+                        "in": "query",
+                        "description": "Nom et prénom du destinataire",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "telephone",
+                        "in": "query",
+                        "description": "Téléphone du destinataire.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email du destinataire.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " enregistre avec succes.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Echec d'enregistrement de l'.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Un destinataire avec ces informations existe déja",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/destinataire_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "The_destinataire"
+                ],
+                "summary": "Supprimer un destinataire",
+                "description": "Elle se charger de supprimer un  et donc son compte",
+                "operationId": "b011486081812682d93d761ed4589d80",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant du destinataire à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " supprimé avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "L'étudiant n'existe pas !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/all_marchandises": {
+            "get": {
+                "tags": [
+                    "The_marchandise"
+                ],
+                "summary": "Afficher la liste des marchandises",
+                "description": "Renvoyer la liste de tous les marchandises",
+                "operationId": "6c5d162cad59f50bad1261ed66e5bc20",
+                "responses": {
+                    "200": {
+                        "description": "Les marchandises ont été trouvé et leurs informations sont retournées",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucune marchandise dans la base de données ",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/marchandise_show/{id}": {
+            "get": {
+                "tags": [
+                    "The_marchandise"
+                ],
+                "summary": "Afficher les infos d'une marchandise",
+                "description": "Renvoyer les infos d'une marchandise",
+                "operationId": "e3912e798d1cbbd268565f49f63d1c64",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant d'une marchandise à voir ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " trouvé  !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun  ne correspond à l'identifiant saisi",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/marchandise_store": {
+            "post": {
+                "tags": [
+                    "The_marchandise"
+                ],
+                "summary": "Enregistrer une nouvelle marchandise",
+                "operationId": "e8df4a61c4b3a39316255c571b152856",
+                "parameters": [
+                    {
+                        "name": "info",
+                        "in": "query",
+                        "description": "Information sur la marchandise",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "nbr_colis",
+                        "in": "query",
+                        "description": "Nombre de colis.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type_colis",
+                        "in": "query",
+                        "description": "Type dee colis.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "catégorie",
+                        "in": "query",
+                        "description": "Categorie d'apartenance du colis.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " enregistre avec succes.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Echec d'enregistrement de l'.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Un client avec ces informations existe déja",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/marchandise_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "The_marchandise"
+                ],
+                "summary": "Supprimer une marchandise",
+                "description": "Elle se charger de supprimer un  et donc son compte",
+                "operationId": "11dd82f834df889b8827c18ee6d72d70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant du marchandise à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " supprimé avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "L'étudiant n'existe pas !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/all_users": {
+            "get": {
+                "tags": [
+                    "The_user"
+                ],
+                "summary": "Afficher la liste des User",
+                "description": "Renvoyer la liste de tous les utilisateurs ayant créer un compte ",
+                "operationId": "304c8d1e31c6f13bf89c43b2473a629a",
+                "responses": {
+                    "200": {
+                        "description": "Les utilisateurs ayant un compte ont été trouvé et leurs informations sont retournées",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun utilisateur ayant créer un compte dans la base de données ",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/user_show/{id}": {
+            "get": {
+                "tags": [
+                    "The_user"
+                ],
+                "summary": "Afficher les infos d'un utilisateur",
+                "description": "Renvoyer les infos du compte d'un utilisateur",
+                "operationId": "10998f72ea862724428e95a35ef4a501",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant de l'étudiant à voir ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " trouvé  !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Aucun  ne correspond à l'identifiant saisi",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/user_store": {
+            "post": {
+                "tags": [
+                    "The_user"
+                ],
+                "summary": "Enregistrer un nouvel User",
+                "operationId": "19b8caf736c08935d1eb21359da5cf07",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "poste",
+                        "in": "query",
+                        "description": "Poste occupé par l'utilisateur.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email de l'utilisateur.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " enregistre avec succes.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Echec d'enregistrement de l'.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Un utilisateur avec ces informations existe déja",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "The_user"
+                ],
+                "summary": "Supprimer un compte d'utilisateur",
+                "description": "Elle se charger de supprimer un  et donc son compte",
+                "operationId": "263352c29ef8bee75f666ff3a6d68b84",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Identifiant de l'utilisateur à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " supprimé avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "L'étudiant n'existe pas !",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    }
+}
